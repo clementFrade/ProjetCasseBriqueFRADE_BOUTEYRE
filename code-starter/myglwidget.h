@@ -6,6 +6,7 @@
 #include <QKeyEvent>
 #include <QColor>
 #include <QVector2D>
+#include <QTimer>
 #include "brique.h"
 #include "balle.h"
 #include "curseurpalette.h"
@@ -33,15 +34,17 @@ protected:
     void paintGL();
 
     // Fonction de gestion d'interactions clavier
-    void keyPressEvent(QKeyEvent * event);
+    //void keyPressEvent(QKeyEvent * event);
 
 private:
 
+    QTimer m_AnimationTimer;
+    float m_TimeElapsed {1.0f};
     GLfloat x=0;
     GLfloat y=0;
     GLfloat angle=0;
-    balle balletest;
-    curseurPalette palettetest;
+    balle *balletest;
+    curseurPalette *palettetest;
     // Quelques variables a definir
     std::vector<brique *> l_brique;
 

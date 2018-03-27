@@ -26,6 +26,14 @@ MyGLWidget::MyGLWidget(QWidget * parent) : QGLWidget(parent)
     // Reglage de la taille/position
     setFixedSize(WIN_WIDTH, WIN_HEIGHT);
     move(QApplication::desktop()->screen()->rect().center() - rect().center());
+    // Connexion du timer
+        connect(&m_AnimationTimer,  &QTimer::timeout, [&] {
+            m_TimeElapsed += 1.0f / 24.0f;
+            updateGL();
+        });
+
+        m_AnimationTimer.setInterval(10);
+        m_AnimationTimer.start();
 
 }
 
@@ -39,8 +47,8 @@ void MyGLWidget::initializeGL()
     l_brique.push_back(new brique(35+i*130.0f,j*-50.0f));
         }
     }
-        balletest=balle(0.0f,0.0f);
-        palettetest = curseurPalette(683.0f);
+    balletest= new balle(0.0f,0.0f);
+    palettetest = new curseurPalette(683.0f);
 }
 
 
@@ -64,47 +72,26 @@ void MyGLWidget::resizeGL(int width, int height)
 // Fonction d'affichage
 void MyGLWidget::paintGL()
 {
-            glClear(GL_COLOR_BUFFER_BIT); // Effacer le buffer de couleur
-            glColor3ub(red,green,blue);  // Couleur à utiliser pour dessiner les objets (dans notre cas bleu)
-            glLoadIdentity();//on reinitialise les valeurs
-            glTranslatef(x,y,0);
-            glRotatef(angle,0,0,1);
-/*if(a==0){
-    if (h==1){
-      glClear(GL_COLOR_BUFFER_BIT); // Effacer le buffer de couleur
-    } else {*/
+
+        glClear(GL_COLOR_BUFFER_BIT); // Effacer le buffer de couleur
+        glColor3ub(red,green,blue);  // Couleur à utiliser pour dessiner les objets (dans notre cas bleu)
+        glLoadIdentity();//on reinitialise les valeurs
+        glTranslatef(x,y,0);
+        glRotatef(angle,0,0,1);
 
         for(brique *brique:l_brique){
             brique->dessiner();
         }
 
 
-        palettetest.dessiner();
-        x_=x_+10.0;
-        y_=y_-10.0;
-
-        balletest.update();
-        balletest.dessiner();
-
+        palettetest->dessiner();
+        balletest->update();
+        balletest->dessiner();
 
 
 }
-/*}else if(a==1) {
-    if (h==1){
-      glClear(GL_COLOR_BUFFER_BIT); // Effacer le buffer de couleur
-    } else {
-    }
-    }// Fin de la déclaration
-    // Reinitialisation du tampon de couleur
 
-    // Reinitialisation de la matrice courante
-
-    // Reglage de la couleur
-
-    // Debut de l'affichage
-}*/
-
-
+/*
 // Fonction de gestion d'interactions clavier
 void MyGLWidget::keyPressEvent(QKeyEvent * event)
 {
@@ -201,3 +188,4 @@ void MyGLWidget::keyPressEvent(QKeyEvent * event)
     event->accept();
     updateGL();
 }
+*/
