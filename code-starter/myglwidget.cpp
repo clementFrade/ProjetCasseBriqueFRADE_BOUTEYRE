@@ -26,6 +26,7 @@ MyGLWidget::MyGLWidget(QWidget * parent) : QGLWidget(parent)
     // Reglage de la taille/position
     setFixedSize(WIN_WIDTH, WIN_HEIGHT);
     move(QApplication::desktop()->screen()->rect().center() - rect().center());
+
 }
 
 
@@ -33,8 +34,13 @@ MyGLWidget::MyGLWidget(QWidget * parent) : QGLWidget(parent)
 void MyGLWidget::initializeGL()
 {
     glClearColor(0.3, 0.3, 0.3, 0.3); // Couleur à utiliser lorsqu’on va nettoyer la fenetre ( = le fond) (fond gris)
-
-
+    for(int i=0;i<10;i++){
+        for(int j=0;j<8;j++){
+    l_brique.push_back(new brique(35+i*130.0f,j*-50.0f));
+        }
+    }
+        balletest=balle(0.0f,0.0f);
+        palettetest = curseurPalette(683.0f);
 }
 
 
@@ -67,44 +73,21 @@ void MyGLWidget::paintGL()
     if (h==1){
       glClear(GL_COLOR_BUFFER_BIT); // Effacer le buffer de couleur
     } else {*/
-        for(int i=0;i<10;i++){
-            for(int j=0;j<8;j++){
-        l_brique.push_back(new brique(35+i*130.0f,j*-50.0f));
-            }
-        }
+
         for(brique *brique:l_brique){
             brique->dessiner();
         }
 
-        curseurPalette palettetest = curseurPalette(683.0f);
+
         palettetest.dessiner();
         x_=x_+10.0;
         y_=y_-10.0;
-        balle balletest=balle(0.0f,0.0f);
+
         balletest.update();
         balletest.dessiner();
 
 
-/*for(int i=0;i<10;i++) {
-    brique briquetest2=brique(130.f,0.0f);
-    briquetest2.dessiner();
-    brique briquetest3=brique(260.f,0.0f);
-    briquetest3.dessiner();
-    brique briquetest4=brique(780.f,0.0f);
-    briquetest4.dessiner();
-    brique briquetest5=brique(910.f,0.0f);
-    briquetest5.dessiner();
-    brique briquetest6=brique(390.f,0.0f);
-    briquetest6.dessiner();
-    brique briquetest7=brique(1040.f,0.0f);
-    briquetest7.dessiner();
-    brique briquetest8=brique(520.f,0.0f);
-    briquetest8.dessiner();
-    brique briquetest9=brique(1170.f,0.0f);
-    briquetest9.dessiner();
-    brique briquetest10=brique(650.f,0.0f);
-    briquetest10.dessiner();
-}*/
+
 }
 /*}else if(a==1) {
     if (h==1){
