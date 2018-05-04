@@ -89,6 +89,9 @@ void MyGLWidget::paintGL()
         palettetest->dessiner();
         balletest->update();
         balletest->dessiner();
+        std::vector<brique *>::iterator it;
+                it=l_brique.begin();
+        while(it != l_brique.end())
         positionBalle_[0]=balletest->returnPosX();
         positionBalle_[1]=balletest->returnPosY();
         positionCurseur_=palettetest->returnPosX();
@@ -123,6 +126,8 @@ void MyGLWidget::paintGL()
             }
             it++;
         }
+
+
 
 }
 
