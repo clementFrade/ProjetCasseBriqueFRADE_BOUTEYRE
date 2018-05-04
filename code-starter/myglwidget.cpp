@@ -89,21 +89,23 @@ void MyGLWidget::paintGL()
         palettetest->dessiner();
         balletest->update();
         balletest->dessiner();
-        for(brique *briques:l_brique){
-            cout<<"brique"<<briques->posx()<<"balle"<<balletest->posx()<<"brique"<<briques->posy()<<"balle"<<balletest->posy ()<<endl;
-           /* if(((briques->posx()+120)>balletest->posx())&&((briques->posx()<balletest->posx()))){
-             cout<<"touché x"<<endl;
-        }
-            if((((briques->posy()-40)<balletest->posy()))&&(briques->posy()>balletest->posy())){
-             cout<<"touché y"<<endl;
-        }*/
-
-            if(((briques->posx()+120)>balletest->posx())&&((briques->posx()<balletest->posx())&&((briques->posy()-40)<balletest->posy()))&&(briques->posy()>balletest->posy()))
+        std::vector<brique *>::iterator it;
+                it=l_brique.begin();
+        while(it != l_brique.end())
             {
+        //for(brique *briques:l_brique){
+            //cout<<"brique"<<briques->posx()<<"balle"<<balletest->posx()<<"brique"<<briques->posy()<<"balle"<<balletest->posy ()<<endl;
+            if((((*it)->posx()+120)>balletest->posx())&&(((*it)->posx()<balletest->posx())&&(((*it)->posy()-40)<balletest->posy()))&&((*it)->posy()>balletest->posy()))
+            {
+               // cout<<briques->life()<<endl;
                 cout<<"touché"<<endl;
-                briques->casser();
+                //briques->casser();
+                it = l_brique.erase(it) ;
             }
+            it++;
         }
+
+
 
 }
 
