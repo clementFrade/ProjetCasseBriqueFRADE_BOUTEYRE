@@ -12,6 +12,8 @@ public:
     balle(float,float);
     dessiner();
     update();
+    float posx();
+    float posy();
 private:
     float x_;
     float y_;

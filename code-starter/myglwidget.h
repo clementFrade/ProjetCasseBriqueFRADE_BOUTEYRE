@@ -34,7 +34,7 @@ protected:
     void paintGL();
 
     // Fonction de gestion d'interactions clavier
-    //void keyPressEvent(QKeyEvent * event);
+    void keyPressEvent(QKeyEvent * event);
 
 private:
 
@@ -44,6 +44,7 @@ private:
     GLfloat y=0;
     GLfloat angle=0;
     balle *balletest;
+    balle *balletest2;
     curseurPalette *palettetest;
     // Quelques variables a definir
     std::vector<brique *> l_brique;

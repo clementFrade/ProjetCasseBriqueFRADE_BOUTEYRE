@@ -16,3 +16,9 @@ balle::update()
     x_=x_+1;
     y_=y_-1;
 }
+float balle::posx(){
+    return x_;
+}
+float balle::posy(){
+    return y_;
+}

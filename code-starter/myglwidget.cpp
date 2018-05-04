@@ -1,6 +1,8 @@
 #include "myglwidget.h"
 #include <QApplication>
 #include <QDesktopWidget>
+#include <iostream>
+using namespace std;
 
 // Declarations des constantes
 const unsigned int WIN_WIDTH  = 1366;
@@ -44,7 +46,7 @@ void MyGLWidget::initializeGL()
     glClearColor(0.3, 0.3, 0.3, 0.3); // Couleur à utiliser lorsqu’on va nettoyer la fenetre ( = le fond) (fond gris)
     for(int i=0;i<10;i++){
         for(int j=0;j<8;j++){
-    l_brique.push_back(new brique(35+i*130.0f,j*-50.0f));
+    l_brique.push_back(new brique(35+i*130.0f,j*-50.0f,1));
         }
     }
     balletest= new balle(0.0f,0.0f);
@@ -79,24 +81,32 @@ void MyGLWidget::paintGL()
         glTranslatef(x,y,0);
         glRotatef(angle,0,0,1);
 
-        for(brique *brique:l_brique){
-            brique->dessiner();
+        for(brique *briques:l_brique){
+            briques->dessiner();
         }
 
 
         palettetest->dessiner();
         balletest->update();
         balletest->dessiner();
-
+        for(brique *briques:l_brique){
+            cout<<"brique"<<briques->posx()<<"balle"<<balletest->posx()<<"brique"<<briques->posy()<<"balle"<<balletest->posy()<<endl;
+            if(((briques->posx()+120)>balletest->posx())&&((briques->posx()<balletest->posx())&&((briques->posy()-40)<balletest->posy()))&&(briques->posy()>balletest->posy()))
+            {
+                cout<<"touché"<<endl;
+                briques->casser();
+            }
+        }
 
 }
 
-/*
+
 // Fonction de gestion d'interactions clavier
 void MyGLWidget::keyPressEvent(QKeyEvent * event)
 {
     switch(event->key())
     {
+    /*
         // Changement de couleur du fond
         case Qt::Key_B:
         {
@@ -134,17 +144,18 @@ void MyGLWidget::keyPressEvent(QKeyEvent * event)
     {
         angle=angle+10;
         break;
-    }
+    }*/
     case Qt::Key_Left:
     {
-        x=x-1;
+        palettetest->left();
         break;
     }
     case Qt::Key_Right:
     {
-        x=x+1;
+        palettetest->right();
         break;
     }
+        /*
     case Qt::Key_Up:
     {
         y=y+1;
@@ -173,7 +184,7 @@ void MyGLWidget::keyPressEvent(QKeyEvent * event)
         window()->close();
         esc=true;
             break;
-        }
+        }*/
 
         // Cas par defaut
         default:
@@ -188,4 +199,4 @@ void MyGLWidget::keyPressEvent(QKeyEvent * event)
     event->accept();
     updateGL();
 }
-*/
+
