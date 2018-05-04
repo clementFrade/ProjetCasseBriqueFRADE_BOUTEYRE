@@ -14,3 +14,13 @@ curseurPalette::dessiner()
     glVertex2f(x_,-690);
     glEnd();
 }
+
+curseurPalette::right()
+{
+    x_=x_+3;
+
+}
+curseurPalette::left()
+{
+    x_=x_-3;
+}

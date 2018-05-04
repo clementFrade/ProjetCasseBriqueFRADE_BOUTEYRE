@@ -16,6 +16,8 @@ public:
     float returnPosY();
     changeDirectionX();
     changeDirectionY();
+    float posx();
+    float posy();
 private:
 
     float position_[2];

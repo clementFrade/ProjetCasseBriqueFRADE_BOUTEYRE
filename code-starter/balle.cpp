@@ -36,3 +36,9 @@ balle::changeDirectionY()
 {
     direction_[1]=-direction_[1];
 }
+float balle::posx(){
+    return x_;
+}
+float balle::posy(){
+    return y_;
+}

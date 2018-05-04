@@ -34,7 +34,7 @@ protected:
     void paintGL();
 
     // Fonction de gestion d'interactions clavier
-    //void keyPressEvent(QKeyEvent * event);
+    void keyPressEvent(QKeyEvent * event);
 
 private:
 
@@ -44,6 +44,7 @@ private:
     GLfloat y=0;
     GLfloat angle=0;
     balle *balletest;
+    balle *balletest2;
     curseurPalette *palettetest;
     float positionBalle_[2];
     // Quelques variables a definir

@@ -9,11 +9,16 @@
 class brique
 {
 public:
-    brique(float,float);
+    brique(float,float,int);
     dessiner();
+    casser();
+    float posx();
+    float posy();
+    int life();
 private:
     float x_;
     float y_;
+    int life_;
 };
 
 #endif // BRIQUE_H

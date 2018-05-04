@@ -11,6 +11,8 @@ class curseurPalette
 public:
     curseurPalette(float);
     dessiner();
+    right();
+    left();
 private:
     float x_;
 };
