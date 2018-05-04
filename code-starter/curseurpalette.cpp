@@ -22,10 +22,10 @@ float curseurPalette::returnPosX()
 
 curseurPalette::right()
 {
-    x_=x_+3;
+    x_=x_+10;
 
 }
 curseurPalette::left()
 {
-    x_=x_-3;
+    x_=x_-10;
 }
