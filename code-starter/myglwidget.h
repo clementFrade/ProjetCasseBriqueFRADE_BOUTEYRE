@@ -45,6 +45,7 @@ private:
     GLfloat angle=0;
     balle *balletest;
     curseurPalette *palettetest;
+    float positionBalle_[2];
     // Quelques variables a definir
     std::vector<brique *> l_brique;
 

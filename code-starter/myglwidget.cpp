@@ -47,7 +47,7 @@ void MyGLWidget::initializeGL()
     l_brique.push_back(new brique(35+i*130.0f,j*-50.0f));
         }
     }
-    balletest= new balle(0.0f,0.0f);
+    balletest= new balle(500.0f,-500.0f);
     palettetest = new curseurPalette(683.0f);
 }
 
@@ -87,6 +87,17 @@ void MyGLWidget::paintGL()
         palettetest->dessiner();
         balletest->update();
         balletest->dessiner();
+        positionBalle_[0]=balletest->returnPosX();
+        positionBalle_[1]=balletest->returnPosY();
+
+        if((positionBalle_[0]<0.0) || (positionBalle_[0]>1346.0))
+        {
+            balletest->changeDirectionX();
+        }
+        if((positionBalle_[1]>0.0) || (positionBalle_[1]<-748.0))
+        {
+            balletest->changeDirectionY();
+        }
 
 
 }
