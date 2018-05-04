@@ -90,7 +90,14 @@ void MyGLWidget::paintGL()
         balletest->update();
         balletest->dessiner();
         for(brique *briques:l_brique){
-            cout<<"brique"<<briques->posx()<<"balle"<<balletest->posx()<<"brique"<<briques->posy()<<"balle"<<balletest->posy()<<endl;
+            cout<<"brique"<<briques->posx()<<"balle"<<balletest->posx()<<"brique"<<briques->posy()<<"balle"<<balletest->posy ()<<endl;
+           /* if(((briques->posx()+120)>balletest->posx())&&((briques->posx()<balletest->posx()))){
+             cout<<"touché x"<<endl;
+        }
+            if((((briques->posy()-40)<balletest->posy()))&&(briques->posy()>balletest->posy())){
+             cout<<"touché y"<<endl;
+        }*/
+
             if(((briques->posx()+120)>balletest->posx())&&((briques->posx()<balletest->posx())&&((briques->posy()-40)<balletest->posy()))&&(briques->posy()>balletest->posy()))
             {
                 cout<<"touché"<<endl;
