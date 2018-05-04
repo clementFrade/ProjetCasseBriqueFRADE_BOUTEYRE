@@ -103,10 +103,10 @@ void MyGLWidget::paintGL()
             balletest->changeDirectionY();
         }
 
-        if (positionBalle_[1]<-670.0){
+        if (positionBalle_[1]<-685.0){
             if((positionBalle_[0]>positionCurseur_)&&(positionBalle_[0]<positionCurseur_+120))
              {
-                 balletest->changeDirectionY();
+                balletest->changeDirectionCurseur((positionBalle_[0]-(positionCurseur_+60.0f))/120.0f);
              }
         }
         std::vector<brique *>::iterator it;
