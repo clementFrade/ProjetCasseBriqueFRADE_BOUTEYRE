@@ -1,6 +1,8 @@
 #include "brique.h"
 #include <QApplication>
 #include <QDesktopWidget>
+#include<iostream>
+using namespace std;
     // Declarations des constantes
 
 brique::brique(float x,float y,int life)
@@ -21,10 +23,12 @@ brique::dessiner()
 
 brique::casser()
 {
-    life_=life_-1;
-    if (life_==0){
+    //life_=life_-1;
+    delete this;
+    cout<<"Je suis delete";
+    /*if ((life_<0)||(life_==0)){
         delete this;
-    }
+    }*/
 }
 
 float brique::posx()
