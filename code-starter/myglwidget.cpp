@@ -89,9 +89,6 @@ void MyGLWidget::paintGL()
         palettetest->dessiner();
         balletest->update();
         balletest->dessiner();
-        std::vector<brique *>::iterator it;
-                it=l_brique.begin();
-        while(it != l_brique.end())
         positionBalle_[0]=balletest->returnPosX();
         positionBalle_[1]=balletest->returnPosY();
         positionCurseur_=palettetest->returnPosX();
@@ -111,13 +108,14 @@ void MyGLWidget::paintGL()
              {
                  balletest->changeDirectionY();
              }
+        }
         std::vector<brique *>::iterator it;
                 it=l_brique.begin();
         while(it != l_brique.end())
             {
         //for(brique *briques:l_brique){
             //cout<<"brique"<<briques->posx()<<"balle"<<balletest->posx()<<"brique"<<briques->posy()<<"balle"<<balletest->posy ()<<endl;
-            if((((*it)->posx()+120)>balletest->posx())&&(((*it)->posx()<balletest->posx())&&(((*it)->posy()-40)<balletest->posy()))&&((*it)->posy()>balletest->posy()))
+            if((((*it)->posx()+120)>balletest->returnPosX())&&(((*it)->posx()<balletest->returnPosX())&&(((*it)->posy()-40)<balletest->returnPosY()))&&((*it)->posy()>balletest->returnPosY()))
             {
                // cout<<briques->life()<<endl;
                 cout<<"touché"<<endl;
