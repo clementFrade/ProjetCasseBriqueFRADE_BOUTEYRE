@@ -31,7 +31,7 @@ private:
         float y_=-1.0f;
     };*/
     GLUquadric* quad = gluNewQuadric();
-    GLdouble radius = 20;//rayon de la sphere
+    GLdouble radius = 10;//rayon de la sphere
     GLint slices=100;//nombre de cotés que comporte la sphere
     GLint stacks=100;//nombre de rayon composant la sphere
 };
