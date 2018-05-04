@@ -13,6 +13,7 @@ public:
     dessiner();
     right();
     left();
+    float returnPosX();
 private:
     float x_;
 };

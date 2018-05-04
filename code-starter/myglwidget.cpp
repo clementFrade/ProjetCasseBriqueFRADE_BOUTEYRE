@@ -91,29 +91,27 @@ void MyGLWidget::paintGL()
         balletest->dessiner();
         positionBalle_[0]=balletest->returnPosX();
         positionBalle_[1]=balletest->returnPosY();
-        for(brique *briques:l_brique){
-            cout<<"brique"<<briques->posx()<<"balle"<<balletest->posx()<<"brique"<<briques->posy()<<"balle"<<balletest->posy ()<<endl;
-           /* if(((briques->posx()+120)>balletest->posx())&&((briques->posx()<balletest->posx()))){
-             cout<<"touché x"<<endl;
-        }
-            if((((briques->posy()-40)<balletest->posy()))&&(briques->posy()>balletest->posy())){
-             cout<<"touché y"<<endl;
-        }*/
+        positionCurseur_=palettetest->returnPosX();
+
 
         if((positionBalle_[0]<0.0) || (positionBalle_[0]>1346.0))
         {
             balletest->changeDirectionX();
         }
-        if((positionBalle_[1]>0.0) || (positionBalle_[1]<-748.0))
+        if(positionBalle_[1]>0.0)
         {
             balletest->changeDirectionY();
         }
-            if(((briques->posx()+120)>balletest->posx())&&((briques->posx()<balletest->posx())&&((briques->posy()-40)<balletest->posy()))&&(briques->posy()>balletest->posy()))
-            {
-                cout<<"touché"<<endl;
-                briques->casser();
-            }
+
+        if (positionBalle_[1]<-670.0){
+            if((positionBalle_[0]>positionCurseur_)&&(positionBalle_[0]<positionCurseur_+120))
+             {
+                 balletest->changeDirectionY();
+             }
         }
+
+
+
 
 
 }

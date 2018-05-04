@@ -15,6 +15,11 @@ curseurPalette::dessiner()
     glEnd();
 }
 
+float curseurPalette::returnPosX()
+{
+    return x_;
+}
+
 curseurPalette::right()
 {
     x_=x_+3;

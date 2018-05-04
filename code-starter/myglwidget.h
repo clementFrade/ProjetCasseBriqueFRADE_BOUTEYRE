@@ -47,6 +47,7 @@ private:
     balle *balletest2;
     curseurPalette *palettetest;
     float positionBalle_[2];
+    float positionCurseur_;
     // Quelques variables a definir
     std::vector<brique *> l_brique;
 
