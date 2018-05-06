@@ -111,25 +111,25 @@ void MyGLWidget::paintGL()
         }
         std::vector<brique *>::iterator it;
                 it=l_brique.begin();
-        while(it != l_brique.end())
+        while(it != (l_brique.end()+1))
             {
         //for(brique *briques:l_brique){
             //cout<<"brique"<<briques->posx()<<"balle"<<balletest->posx()<<"brique"<<briques->posy()<<"balle"<<balletest->posy ()<<endl;
             if((((*it)->posx()+120)>=balletest->returnPosX())&&(((*it)->posx()<=balletest->returnPosX())&&(((*it)->posy()-40)<=balletest->returnPosY()))&&((*it)->posy()>=balletest->returnPosY()))
             {
-                if(((*it)->posx()+120==balletest->returnPosX())&&(((*it)->posy()-40)<balletest->returnPosY())&&((*it)->posy()>balletest->returnPosY()))
+                if(((*it)->posx()+121>=balletest->returnPosX())&&((*it)->posx()+119<=balletest->returnPosX()))
                 {
                     balletest->changeDirectionX();
                 }
-                if(((*it)->posx()==balletest->returnPosX())&&(((*it)->posy()-40)<balletest->returnPosY())&&((*it)->posy()>balletest->returnPosY()))
+                if(((*it)->posx()<=(balletest-1)->returnPosX())&&((*it)->posx()>=(balletest+1)->returnPosX()))
                 {
                     balletest->changeDirectionX();
                 }
-                if((((*it)->posx()+120)>=balletest->returnPosX())&&(((*it)->posx()<=balletest->returnPosX())&&(((*it)->posy()-40)==balletest->returnPosY())))
+                if((((*it)->posy()-41)<=balletest->returnPosY())&&(((*it)->posy()-39)>=balletest->returnPosY()))
                 {
                     balletest->changeDirectionY();
                 }
-                if((((*it)->posx()+120)>=balletest->returnPosX())&&(((*it)->posx()<=balletest->returnPosX())&&(((*it)->posy())==balletest->returnPosY())))
+                if((((*it)->posy()-1)<=balletest->returnPosY())&&(((*it)->posy()+1)>=balletest->returnPosY()))
                 {
                     balletest->changeDirectionY();
                 }
