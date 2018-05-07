@@ -111,7 +111,7 @@ void MyGLWidget::paintGL()
         }
         std::vector<brique *>::iterator it;
                 it=l_brique.begin();
-        while(it != (l_brique.end()+1))
+        while(it != l_brique.end())
             {
         //for(brique *briques:l_brique){
             //cout<<"brique"<<briques->posx()<<"balle"<<balletest->posx()<<"brique"<<briques->posy()<<"balle"<<balletest->posy ()<<endl;
