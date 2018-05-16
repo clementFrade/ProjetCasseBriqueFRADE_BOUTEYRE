@@ -21,6 +21,7 @@ public:
 
     // Constructeur
     MyGLWidget(QWidget * parent = nullptr);
+    void setXBarre(float x);
 
 protected:
 
@@ -48,6 +49,7 @@ private:
     curseurPalette *palettetest;
     float positionBalle_[2];
     float positionCurseur_;
+    float pas=0.0f;
     // Quelques variables a definir
     std::vector<brique *> l_brique;
 

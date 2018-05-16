@@ -52,6 +52,11 @@ void MyGLWidget::initializeGL()
     balletest= new balle(500.0f,-500.0f);
     palettetest = new curseurPalette(683.0f);
 }
+void MyGLWidget::setXBarre(float x){
+    pas = x;
+
+
+}
 
 
 // Fonction de redimensionnement
@@ -143,7 +148,7 @@ void MyGLWidget::paintGL()
         }
 
 
-
+    palettetest->setX(pas);
 }
 
 

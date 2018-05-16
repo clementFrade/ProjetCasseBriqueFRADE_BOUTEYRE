@@ -14,6 +14,7 @@ public:
     right();
     left();
     float returnPosX();
+    void setX(float x) {x_=x_+x;}
 private:
     float x_;
 };
