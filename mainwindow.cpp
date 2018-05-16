@@ -100,7 +100,6 @@ void MainWindow::processFrameAndUpdateGUI(){
         }
 
         // Display frame2
-        //imshow("WebCam2", frame2);
         QImage qimgOriginal((uchar*)frame2.data,frame2.cols,frame2.rows,frame2.step,QImage::Format_RGB888);
         ui->lblOriginal->setPixmap(QPixmap::fromImage(qimgOriginal));
         // Swap matrixes

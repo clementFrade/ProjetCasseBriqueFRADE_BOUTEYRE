@@ -37,6 +37,10 @@ protected:
     // Fonction de gestion d'interactions clavier
     void keyPressEvent(QKeyEvent * event);
 
+    //Fonction de gestion de la partie
+    void etatPartie ();
+    void Newboule();
+
 private:
 
     QTimer m_AnimationTimer;
@@ -50,8 +54,9 @@ private:
     float positionBalle_[2];
     float positionCurseur_;
     float pas=0.0f;
-    // Quelques variables a definir
     std::vector<brique *> l_brique;
+    int nbBoules=3;
+    bool start;
 
 };
 

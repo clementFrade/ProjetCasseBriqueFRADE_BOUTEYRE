@@ -36,6 +36,7 @@ MyGLWidget::MyGLWidget(QWidget * parent) : QGLWidget(parent)
 
         m_AnimationTimer.setInterval(10);
         m_AnimationTimer.start();
+        start=false;
 
 }
 
@@ -46,16 +47,15 @@ void MyGLWidget::initializeGL()
     glClearColor(0.3, 0.3, 0.3, 0.3); // Couleur à utiliser lorsqu’on va nettoyer la fenetre ( = le fond) (fond gris)
     for(int i=0;i<10;i++){
         for(int j=0;j<8;j++){
-    l_brique.push_back(new brique(35+i*130.0f,j*-50.0f,1));
+    l_brique.push_back(new brique(i*138.0f,j*-50.0f,1));
         }
     }
     balletest= new balle(500.0f,-500.0f);
     palettetest = new curseurPalette(683.0f);
 }
+
 void MyGLWidget::setXBarre(float x){
     pas = x;
-
-
 }
 
 
@@ -98,7 +98,10 @@ void MyGLWidget::paintGL()
         positionBalle_[1]=balletest->returnPosY();
         positionCurseur_=palettetest->returnPosX();
 
-
+        if((positionBalle_[1]<(-700)))
+        {
+            etatPartie();
+        }
         if((positionBalle_[0]<0.0) || (positionBalle_[0]>1346.0))
         {
             balletest->changeDirectionX();
@@ -118,29 +121,24 @@ void MyGLWidget::paintGL()
                 it=l_brique.begin();
         while(it != l_brique.end())
             {
-        //for(brique *briques:l_brique){
-            //cout<<"brique"<<briques->posx()<<"balle"<<balletest->posx()<<"brique"<<briques->posy()<<"balle"<<balletest->posy ()<<endl;
             if((((*it)->posx()+120)>=balletest->returnPosX())&&(((*it)->posx()<=balletest->returnPosX())&&(((*it)->posy()-40)<=balletest->returnPosY()))&&((*it)->posy()>=balletest->returnPosY()))
             {
-                if(((*it)->posx()+121>=balletest->returnPosX())&&((*it)->posx()+119<=balletest->returnPosX()))
+                if(((*it)->posx()+122>=balletest->returnPosX())&&((*it)->posx()+118<=balletest->returnPosX()))
                 {
                     balletest->changeDirectionX();
                 }
-                if(((*it)->posx()<=(balletest-1)->returnPosX())&&((*it)->posx()>=(balletest+1)->returnPosX()))
+                if(((*it)->posx()<=(balletest-2)->returnPosX())&&((*it)->posx()>=(balletest+2)->returnPosX()))
                 {
                     balletest->changeDirectionX();
                 }
-                if((((*it)->posy()-41)<=balletest->returnPosY())&&(((*it)->posy()-39)>=balletest->returnPosY()))
+                if((((*it)->posy()-42)<=balletest->returnPosY())&&(((*it)->posy()-38)>=balletest->returnPosY()))
                 {
                     balletest->changeDirectionY();
                 }
-                if((((*it)->posy()-1)<=balletest->returnPosY())&&(((*it)->posy()+1)>=balletest->returnPosY()))
+                if((((*it)->posy()-2)<=balletest->returnPosY())&&(((*it)->posy()+2)>=balletest->returnPosY()))
                 {
                     balletest->changeDirectionY();
                 }
-               // cout<<briques->life()<<endl;
-                cout<<"touché"<<endl;
-                //briques->casser();
                 it = l_brique.erase(it);
 
             }
@@ -249,5 +247,24 @@ void MyGLWidget::keyPressEvent(QKeyEvent * event)
     // Acceptation de l'evenement et mise a jour de la scene
     event->accept();
     updateGL();
+}
+
+void MyGLWidget::etatPartie () {
+    if(start){
+        nbBoules = nbBoules-1;
+        if (nbBoules>0){
+            start=false;
+            Newboule();
+        }
+        else {
+
+            start=false;
+        }
+
+    }
+}
+void MyGLWidget::Newboule(){
+    balletest= new balle(500.0f,-500.0f);
+    palettetest = new curseurPalette(683.0f);
 }
 

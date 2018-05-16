@@ -14,7 +14,7 @@ public:
     right();
     left();
     float returnPosX();
-    void setX(float x) {x_=x_+x;}
+    void setX(float pas);
 private:
     float x_;
 };
