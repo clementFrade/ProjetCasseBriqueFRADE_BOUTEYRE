@@ -105,6 +105,8 @@ void MainWindow::processFrameAndUpdateGUI(){
         // Swap matrixes
         swap(frameRect1,frameRect2);
 
+        ui->label_2->setText(QString::number(balle_));
+
 
 
 
@@ -138,6 +140,7 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
     case Qt::Key_Space:
     {
         //ui->widget->setStart(true);
+        ui->widget->setStart();
         break;
     }
 

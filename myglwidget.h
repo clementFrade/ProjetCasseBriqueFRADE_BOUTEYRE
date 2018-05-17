@@ -22,6 +22,7 @@ public:
     // Constructeur
     MyGLWidget(QWidget * parent = nullptr);
     void setXBarre(float x);
+    void setStart();
 
 protected:
 

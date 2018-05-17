@@ -35,8 +35,6 @@ MyGLWidget::MyGLWidget(QWidget * parent) : QGLWidget(parent)
         });
 
         m_AnimationTimer.setInterval(10);
-        m_AnimationTimer.start();
-        start=false;
 
 }
 
@@ -50,7 +48,7 @@ void MyGLWidget::initializeGL()
     l_brique.push_back(new brique(i*138.0f,j*-50.0f,1));
         }
     }
-    balletest= new balle(500.0f,-500.0f);
+    balletest= new balle(743.0f,-685.0f);
     palettetest = new curseurPalette(683.0f);
 }
 
@@ -100,7 +98,10 @@ void MyGLWidget::paintGL()
 
         if((positionBalle_[1]<(-700)))
         {
-            etatPartie();
+            balletest=new balle(palettetest->returnPosX()+60.0,-685.0f);
+            Sleep(10000);
+            setStart();
+            //etatPartie();
         }
         if((positionBalle_[0]<0.0) || (positionBalle_[0]>1346.0))
         {
@@ -250,21 +251,25 @@ void MyGLWidget::keyPressEvent(QKeyEvent * event)
 }
 
 void MyGLWidget::etatPartie () {
-    if(start){
+    if(nbBoules>=0){
         nbBoules = nbBoules-1;
-        if (nbBoules>0){
-            start=false;
-            Newboule();
+        setStart();
         }
-        else {
-
-            start=false;
-        }
+    else{
+        setStart();
 
     }
 }
 void MyGLWidget::Newboule(){
     balletest= new balle(500.0f,-500.0f);
     palettetest = new curseurPalette(683.0f);
+}
+
+void MyGLWidget::setStart(){
+    if(m_AnimationTimer.isActive())
+        m_AnimationTimer.stop();
+    else
+        m_AnimationTimer.start();
+
 }
 

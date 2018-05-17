@@ -52,6 +52,7 @@ private:
     int templateHeight;
     int i=2;
     bool etat=false;
+    int balle_=3;
 
     Mat frame1,frame2,frameRect1,frameRect2;
 

@@ -9,7 +9,12 @@
 class balle
 {
 public:
+    //Constructeur
     balle(float,float);
+
+    // Destructeur
+    virtual ~balle();
+
     dessiner();
     update();
     float returnPosX();
@@ -20,7 +25,7 @@ public:
 private:
 
     float position_[2];
-    float direction_[2]={1.0f,-1.0f};
+    float direction_[2]={1.0f,1.0f};
     GLUquadric* quad = gluNewQuadric();
     GLdouble radius = 10;//rayon de la sphere
     GLint slices=100;//nombre de cotés que comporte la sphere

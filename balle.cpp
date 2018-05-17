@@ -5,6 +5,14 @@ balle::balle(float x,float y)
     position_[0]=x;
     position_[1]=y;
 }
+
+// Destructeur
+balle::~balle()
+{
+    // Destruction des quadriques
+    gluDeleteQuadric(quad);
+}
+
 balle::dessiner()
 {
     glTranslatef(position_[0],position_[1], 0.0);
