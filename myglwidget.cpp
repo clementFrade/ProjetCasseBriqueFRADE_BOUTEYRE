@@ -45,7 +45,7 @@ void MyGLWidget::initializeGL()
     glClearColor(0.3, 0.3, 0.3, 0.3); // Couleur à utiliser lorsqu’on va nettoyer la fenetre ( = le fond) (fond gris)
     for(int i=0;i<10;i++){
         for(int j=0;j<4;j++){
-            //l_brique.push_back(new brique(i*122.0f,j*-50.0f,1));
+            l_brique.push_back(new brique(i*122.0f,j*-50.0f,1));
         }
     }
     balletest= new balle(743.0f,-685.0f);
@@ -90,10 +90,6 @@ void MyGLWidget::paintGL()
 
 
         palettetest->dessiner();
-        positionBalle_[0]=balletest->returnPosX();
-        //cout<<"     returnPosX : "<<balletest->returnPosX();
-        positionBalle_[1]=balletest->returnPosY();
-        cout<<"     returnPosY : "<<balletest->returnPosY()<<"     ";
         positionCurseur_=palettetest->returnPosX();
 
         if((positionBalle_[1]<(-700)))
@@ -111,13 +107,14 @@ void MyGLWidget::paintGL()
         }
         balletest->update();
         balletest->dessiner();
-
-        if((positionBalle_[0]<0.0) || (positionBalle_[0]>1346.0))
+        positionBalle_[0]=balletest->returnPosX();
+        if((positionBalle_[0]<4.0) || (positionBalle_[0]>1362.0))
         {
             balletest->changeDirectionX();
         }
-        cout<<"     positionBalle_[1] : "<<positionBalle_[1];
-        if(positionBalle_[1]>-600.0f)
+
+        positionBalle_[1]=balletest->returnPosY();
+        if(positionBalle_[1]>-5.0)
         {
             balletest->changeDirectionY();
         }
@@ -129,7 +126,7 @@ void MyGLWidget::paintGL()
              }
         }
         std::vector<brique *>::iterator it;
-                it=l_brique.begin();
+        it=l_brique.begin();
         while(it != l_brique.end())
             {
             if((((*it)->posx()+120)>=balletest->returnPosX())&&(((*it)->posx()<=balletest->returnPosX())&&(((*it)->posy()-40)<=balletest->returnPosY()))&&((*it)->posy()>=balletest->returnPosY()))
