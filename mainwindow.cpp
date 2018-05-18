@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     //ui->label->setAlignment(Qt::AlignLeft);
     //ui->label->setAlignment(Qt::AlignTop);
-    capwebcam.open(0);
+    //capwebcam.open(0);
 
 
     if(capwebcam.isOpened() == false){
@@ -105,7 +105,7 @@ void MainWindow::processFrameAndUpdateGUI(){
         // Swap matrixes
         swap(frameRect1,frameRect2);
 
-        ui->label_2->setText(QString::number(balle_));
+        ui->label_2->setText(QString::number(ui->widget->etatPartie()));
 
 
 
@@ -152,12 +152,12 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
     }
     case Qt::Key_Left:
     {
-
+        ui->widget->deplacement(2);
         break;
     }
     case Qt::Key_Right:
     {
-
+        ui->widget->deplacement(1);
         break;
     }
     case Qt::Key_Up:

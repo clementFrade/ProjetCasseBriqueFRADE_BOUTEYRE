@@ -23,6 +23,8 @@ public:
     MyGLWidget(QWidget * parent = nullptr);
     void setXBarre(float x);
     void setStart();
+    int etatPartie ();
+    void deplacement (int direction);
 
 protected:
 
@@ -39,7 +41,7 @@ protected:
     void keyPressEvent(QKeyEvent * event);
 
     //Fonction de gestion de la partie
-    void etatPartie ();
+
     void Newboule();
 
 private:

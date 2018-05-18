@@ -44,8 +44,8 @@ void MyGLWidget::initializeGL()
 {
     glClearColor(0.3, 0.3, 0.3, 0.3); // Couleur à utiliser lorsqu’on va nettoyer la fenetre ( = le fond) (fond gris)
     for(int i=0;i<10;i++){
-        for(int j=0;j<8;j++){
-    l_brique.push_back(new brique(i*138.0f,j*-50.0f,1));
+        for(int j=0;j<4;j++){
+            //l_brique.push_back(new brique(i*122.0f,j*-50.0f,1));
         }
     }
     balletest= new balle(743.0f,-685.0f);
@@ -81,8 +81,8 @@ void MyGLWidget::paintGL()
         glClear(GL_COLOR_BUFFER_BIT); // Effacer le buffer de couleur
         glColor3ub(red,green,blue);  // Couleur à utiliser pour dessiner les objets (dans notre cas bleu)
         glLoadIdentity();//on reinitialise les valeurs
-        glTranslatef(x,y,0);
-        glRotatef(angle,0,0,1);
+        //glTranslatef(x,y,0);
+        //glRotatef(angle,0,0,1);
 
         for(brique *briques:l_brique){
             briques->dessiner();
@@ -90,24 +90,34 @@ void MyGLWidget::paintGL()
 
 
         palettetest->dessiner();
-        balletest->update();
-        balletest->dessiner();
         positionBalle_[0]=balletest->returnPosX();
+        //cout<<"     returnPosX : "<<balletest->returnPosX();
         positionBalle_[1]=balletest->returnPosY();
+        cout<<"     returnPosY : "<<balletest->returnPosY()<<"     ";
         positionCurseur_=palettetest->returnPosX();
 
         if((positionBalle_[1]<(-700)))
         {
-            balletest=new balle(palettetest->returnPosX()+60.0,-685.0f);
-            Sleep(10000);
-            setStart();
-            //etatPartie();
+            if (nbBoules>0){
+                nbBoules=nbBoules-1;
+                balletest->setPosition(palettetest->returnPosX()+60.0,-685.0f);
+                setStart();
+            }
+            else
+            {
+                balletest->setPosition(2000,2000);
+                setStart();
+             }
         }
+        balletest->update();
+        balletest->dessiner();
+
         if((positionBalle_[0]<0.0) || (positionBalle_[0]>1346.0))
         {
             balletest->changeDirectionX();
         }
-        if(positionBalle_[1]>0.0)
+        cout<<"     positionBalle_[1] : "<<positionBalle_[1];
+        if(positionBalle_[1]>-600.0f)
         {
             balletest->changeDirectionY();
         }
@@ -156,45 +166,6 @@ void MyGLWidget::keyPressEvent(QKeyEvent * event)
 {
     switch(event->key())
     {
-    /*
-        // Changement de couleur du fond
-        case Qt::Key_B:
-        {
-        float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-                float v = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-                float b = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-                float a = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-                glClearColor(r,v,b,a);
-            break;
-        }
-
-        // Changement de couleur de l'objet
-        case Qt::Key_C:
-    {
-        red = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-               red=red*256;
-                green = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-                green=green*256;
-                blue = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-                blue=blue*256;
-            break;
-        }
-
-        // Affichage/Masquage de l'objet
-        case Qt::Key_H:
-        {
-        if(h==0){
-            h=1;
-        } else if (h==1) {
-            h=0;
-        }
-            break;
-        }
-    case Qt::Key_X:
-    {
-        angle=angle+10;
-        break;
-    }*/
     case Qt::Key_Left:
     {
         palettetest->left();
@@ -250,15 +221,8 @@ void MyGLWidget::keyPressEvent(QKeyEvent * event)
     updateGL();
 }
 
-void MyGLWidget::etatPartie () {
-    if(nbBoules>=0){
-        nbBoules = nbBoules-1;
-        setStart();
-        }
-    else{
-        setStart();
-
-    }
+int MyGLWidget::etatPartie () {
+    return nbBoules;
 }
 void MyGLWidget::Newboule(){
     balletest= new balle(500.0f,-500.0f);
@@ -267,9 +231,24 @@ void MyGLWidget::Newboule(){
 
 void MyGLWidget::setStart(){
     if(m_AnimationTimer.isActive())
+    {
+        balletest->update();
+        balletest->dessiner();
         m_AnimationTimer.stop();
+    }
     else
         m_AnimationTimer.start();
+
+}
+
+void MyGLWidget::deplacement(int direction)
+{
+    if (direction==1){
+        palettetest->right();
+    }
+    else if (direction==2) {
+        palettetest->left();
+    }
 
 }
 

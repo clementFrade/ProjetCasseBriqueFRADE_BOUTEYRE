@@ -39,10 +39,10 @@
    <widget class="QLabel" name="lblOriginal">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>515</y>
-      <width>47</width>
-      <height>16</height>
+      <x>360</x>
+      <y>520</y>
+      <width>321</width>
+      <height>171</height>
      </rect>
     </property>
     <property name="text">
