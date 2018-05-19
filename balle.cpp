@@ -27,10 +27,6 @@ balle::update()
 {
     position_[0]=position_[0]+direction_[0];
     position_[1]=position_[1]+direction_[1];
-    //cout<<"direction x : "<<direction_[0];
-    cout<<"      direction y : "<<direction_[1];
-    //cout<<"      position x : "<<position_[0];
-    cout<<"      position y : "<<position_[1]<<endl;
 }
 
 
@@ -55,8 +51,8 @@ balle::changeDirectionY()
 
 balle::changeDirectionCurseur(float pos)
 {
-    direction_[0]=pos;
-    direction_[1]=sqrt(1-pos*pos);
+    direction_[0]=pos+pos;
+    direction_[1]=sqrt(1-pos*pos)+sqrt(1-pos*pos);
     //direction_[0]=-direction_[0]+pos;
     //direction_[1]=-direction_[0]+sin(acos(pos));
 }

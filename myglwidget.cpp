@@ -14,9 +14,9 @@ int c=0;
 int h=0;
 float x_=0.0;
 float y_=0.0f;
-float red = 0;
+float red = 255;
 float green = 0;
-float blue = 255;
+float blue = 0;
 bool esc=false;
 
 
@@ -42,6 +42,7 @@ MyGLWidget::MyGLWidget(QWidget * parent) : QGLWidget(parent)
 // Fonction d'initialisation
 void MyGLWidget::initializeGL()
 {
+
     glClearColor(0.3, 0.3, 0.3, 0.3); // Couleur à utiliser lorsqu’on va nettoyer la fenetre ( = le fond) (fond gris)
     for(int i=0;i<10;i++){
         for(int j=0;j<4;j++){
@@ -79,7 +80,7 @@ void MyGLWidget::paintGL()
 {
 
         glClear(GL_COLOR_BUFFER_BIT); // Effacer le buffer de couleur
-        glColor3ub(red,green,blue);  // Couleur à utiliser pour dessiner les objets (dans notre cas bleu)
+        glColor3ub(255,255,255);  // Couleur à utiliser pour dessiner les objets (dans notre cas bleu)
         glLoadIdentity();//on reinitialise les valeurs
         //glTranslatef(x,y,0);
         //glRotatef(angle,0,0,1);

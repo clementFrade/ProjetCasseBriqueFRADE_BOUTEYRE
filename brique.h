@@ -19,6 +19,8 @@ private:
     float x_;
     float y_;
     int life_;
+    QImage brique_;
+    GLuint textureBrique;
 };
 
 #endif // BRIQUE_H
