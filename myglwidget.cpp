@@ -5,7 +5,7 @@
 using namespace std;
 
 // Declarations des constantes
-const unsigned int WIN_WIDTH  = 1366;
+const unsigned int WIN_WIDTH  = 1220;
 const unsigned int WIN_HEIGHT = 768;
 const float ASPECT_RATIO      = static_cast<float>(WIN_WIDTH) / WIN_HEIGHT;
 const float ORTHO_DIM         = 50.0f;
@@ -44,7 +44,7 @@ void MyGLWidget::initializeGL()
 {
 
     glClearColor(0.3, 0.3, 0.3, 0.3); // Couleur à utiliser lorsqu’on va nettoyer la fenetre ( = le fond) (fond gris)
-    for(int i=0;i<10;i++){
+    for(int i=0;i<11;i++){
         for(int j=0;j<4;j++){
             l_brique.push_back(new brique(i*122.0f,j*-50.0f,1));
         }
@@ -68,7 +68,7 @@ void MyGLWidget::resizeGL(int width, int height)
     glLoadIdentity();
    // glOrtho(-ORTHO_DIM * ASPECT_RATIO, ORTHO_DIM * ASPECT_RATIO, -ORTHO_DIM, ORTHO_DIM, -2.0f * ORTHO_DIM, 2.0f * ORTHO_DIM);
 
-    glOrtho(0.0f, 1366.0f,-766.0f,0.0f, -2.0f * ORTHO_DIM, 2.0f * ORTHO_DIM);
+    glOrtho(0.0f, 1220.0f,-766.0f,0.0f, -2.0f * ORTHO_DIM, 2.0f * ORTHO_DIM);
     // Definition de la matrice de modele
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -109,7 +109,7 @@ void MyGLWidget::paintGL()
         balletest->update();
         balletest->dessiner();
         positionBalle_[0]=balletest->returnPosX();
-        if((positionBalle_[0]<4.0) || (positionBalle_[0]>1362.0))
+        if((positionBalle_[0]<4.0) || (positionBalle_[0]>1216.0))
         {
             balletest->changeDirectionX();
         }
@@ -149,6 +149,7 @@ void MyGLWidget::paintGL()
                     balletest->changeDirectionY();
                 }
                 it = l_brique.erase(it);
+                score_ =score_ + 10;
 
             }
             it++;

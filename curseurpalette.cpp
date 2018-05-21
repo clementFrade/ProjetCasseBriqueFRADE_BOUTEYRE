@@ -32,8 +32,8 @@ curseurPalette::left()
     x_=x_-10;
 }
 void curseurPalette::setX(float pas){
-    if(x_>1246.0){
-        x_=1244.0;
+    if(x_>1100.0){
+        x_=1100.0;
     }
     else{
         if (x_<0){

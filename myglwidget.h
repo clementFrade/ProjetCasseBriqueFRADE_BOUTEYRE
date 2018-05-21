@@ -25,6 +25,7 @@ public:
     void setStart();
     int etatPartie ();
     void deplacement (int direction);
+    int score_=0;
 
 protected:
 

@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     //ui->label->setAlignment(Qt::AlignLeft);
     //ui->label->setAlignment(Qt::AlignTop);
-    //capwebcam.open(0);
+    capwebcam.open(0);
 
 
     if(capwebcam.isOpened() == false){
@@ -106,6 +106,7 @@ void MainWindow::processFrameAndUpdateGUI(){
         swap(frameRect1,frameRect2);
 
         ui->label_2->setText(QString::number(ui->widget->etatPartie()));
+        ui->label_4->setText(QString::number(ui->widget->score_));
 
 
 

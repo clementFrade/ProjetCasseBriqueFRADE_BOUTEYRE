@@ -51,8 +51,8 @@ balle::changeDirectionY()
 
 balle::changeDirectionCurseur(float pos)
 {
-    direction_[0]=pos+pos;
-    direction_[1]=sqrt(1-pos*pos)+sqrt(1-pos*pos);
+    direction_[0]=pos*2;
+    direction_[1]=sqrt(1-pos*pos)*2;
     //direction_[0]=-direction_[0]+pos;
     //direction_[1]=-direction_[0]+sin(acos(pos));
 }
