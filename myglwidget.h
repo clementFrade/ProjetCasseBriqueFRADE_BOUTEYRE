@@ -48,9 +48,6 @@ private:
 
     QTimer m_AnimationTimer;
     float m_TimeElapsed {1.0f};
-    GLfloat x=0;
-    GLfloat y=0;
-    GLfloat angle=0;
     balle *balle_;
     curseurPalette *curseur;
     float positionBalle_[2];

@@ -81,7 +81,7 @@ void MyGLWidget::paintGL()
 
         if((positionBalle_[1]<(-700)))
         {
-            if (nbBoules>2){
+            if (nbBoules>1){
                 nbBoules=nbBoules-1;
                 balle_->setPosition(curseur->returnPosX()+60.0,-685.0f);
                 StartStop();
