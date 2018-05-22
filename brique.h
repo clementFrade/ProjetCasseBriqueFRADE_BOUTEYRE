@@ -9,18 +9,18 @@
 class brique
 {
 public:
+    //Constructeur
     brique(float,float,int);
-    dessiner();
-    casser();
-    float posx();
-    float posy();
-    int life();
+    dessiner(); //Dessine une brique de longueur 120 et hauteur 40 en ajoutant une texture
+    float posx() {return x_;} //Retourne la position en x d'une brique
+    float posy() {return y_;} //Retourne la position en y d'une brique
+    int life() {return life_;} //Retourne le nombre de vie d'une brique
 private:
-    float x_;
-    float y_;
-    int life_;
-    QImage brique_;
-    GLuint textureBrique;
+    float x_; //Position en x
+    float y_; //Position en y
+    int life_; //Nombre de vie
+    QImage brique_; //Image utilisé pour la texture
+    GLuint textureBrique; //GLuint utilisé pour la texture
 };
 
 #endif // BRIQUE_H

@@ -29,37 +29,13 @@ public:
 private:
     Ui::MainWindow *ui;
 
+    cv::VideoCapture webcam;
 
+    QImage imgCamera;
 
+    QTimer* timer_;
 
-    cv::VideoCapture capwebcam;
-    cv::Mat matOriginal;
-    cv::Mat matProcess;
-
-
-    QImage qimgOriginal;
-    QImage qimgProcess;
-
-    std::vector<cv::Vec3f>VecCircles;
-    std::vector<cv::Vec3f>::iterator itrCircles;
-
-    QTimer* tmrTimer;
-    int frameWidth;
-    int frameHeight;
-    int subImageWidth;
-    int subImageHeight;
-    int templateWidth;
-    int templateHeight;
-    int i=2;
-    bool etat=false;
-    int balle_=3;
-
-    Mat frame1,frame2,frameRect1,frameRect2;
-
-
-
-
-
+    Mat image1,image2,rectangle1,rectangle2;
 
 public:
     void keyPressEvent(QKeyEvent * event);
@@ -67,7 +43,7 @@ public:
 
 
 public slots:
-    void processFrameAndUpdateGUI();
+    void update();
 };
 
 #endif // MAINWINDOW_H

@@ -1,9 +1,7 @@
 #include "brique.h"
 #include <QApplication>
 #include <QDesktopWidget>
-#include<iostream>
-using namespace std;
-    // Declarations des constantes
+
 
 brique::brique(float x,float y,int life)
 {
@@ -22,6 +20,7 @@ brique::brique(float x,float y,int life)
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 }
+
 brique::dessiner()
 {
     glBegin(GL_QUADS); // Primitive à afficher et début de la déclaration des vertices de cette primitive
@@ -30,27 +29,4 @@ brique::dessiner()
     glTexCoord2f(1, 1); glVertex3f(x_+120, y_, 1);
     glTexCoord2f(0, 1); glVertex3f(x_,y_, 1);
     glEnd();
-}
-
-brique::casser()
-{
-    //life_=life_-1;
-    delete this;
-    cout<<"Je suis delete";
-    /*if ((life_<0)||(life_==0)){
-        delete this;
-    }*/
-}
-
-float brique::posx()
-{
-return x_;
-}
-float brique::posy()
-{
-return y_;
-}
-int brique::life()
-{
-return life_;
 }

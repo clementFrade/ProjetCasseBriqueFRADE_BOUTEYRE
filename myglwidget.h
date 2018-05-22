@@ -1,7 +1,6 @@
 #ifndef MYGLWIDGET_H
 #define MYGLWIDGET_H
 
-#include "palette.h"
 #include <QGLWidget>
 #include <QKeyEvent>
 #include <QColor>
@@ -21,9 +20,10 @@ public:
 
     // Constructeur
     MyGLWidget(QWidget * parent = nullptr);
-    void setXBarre(float x);
-    void setStart();
-    int etatPartie ();
+
+    void setXBarre(float x) {pas=x;} //Met à jour le pas pour la direction du curseur
+    void StartStop(); //Stop/Start l'animation
+    int boulesDispo () {return nbBoules;}
     void deplacement (int direction);
     int score_=0;
 
@@ -42,7 +42,6 @@ protected:
     void keyPressEvent(QKeyEvent * event);
 
     //Fonction de gestion de la partie
-
     void Newboule();
 
 private:
@@ -52,9 +51,8 @@ private:
     GLfloat x=0;
     GLfloat y=0;
     GLfloat angle=0;
-    balle *balletest;
-    balle *balletest2;
-    curseurPalette *palettetest;
+    balle *balle_;
+    curseurPalette *curseur;
     float positionBalle_[2];
     float positionCurseur_;
     float pas=0.0f;

@@ -9,14 +9,16 @@
 class curseurPalette
 {
 public:
+    //Constructeur
     curseurPalette(float);
-    dessiner();
-    right();
-    left();
-    float returnPosX();
-    void setX(float pas);
+    dessiner(); //Desine le curseur
+    right() {x_=x_+10;} //Permet de déplacer le curseur vers la droite
+    left()  {x_=x_-10;} //Permet de déplacer le curseur vers la gauche
+    float returnPosX() {return x_;} //Retourne position x
+    void setX(float pas); //Déplace le curseur en fonction du vecteur de la caméra
+
 private:
-    float x_;
+    float x_; //Postion du curseur en x
 };
 
 #endif // CURSEURPALETTE_H

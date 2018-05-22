@@ -39,16 +39,14 @@ SOURCES += \
     balle.cpp \
     brique.cpp \
     curseurpalette.cpp \
-    myglwidget.cpp \
-    palette.cpp
+    myglwidget.cpp
 
 HEADERS += \
         mainwindow.h \
     balle.h \
     brique.h \
     curseurpalette.h \
-    myglwidget.h \
-    palette.h
+    myglwidget.h
 
 FORMS += \
         mainwindow.ui

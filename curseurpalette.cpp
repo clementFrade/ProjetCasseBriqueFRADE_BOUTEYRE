@@ -17,20 +17,6 @@ curseurPalette::dessiner()
     glEnd();
 }
 
-float curseurPalette::returnPosX()
-{
-    return x_;
-}
-
-curseurPalette::right()
-{
-    x_=x_+10;
-
-}
-curseurPalette::left()
-{
-    x_=x_-10;
-}
 void curseurPalette::setX(float pas){
     if(x_>1100.0){
         x_=1100.0;

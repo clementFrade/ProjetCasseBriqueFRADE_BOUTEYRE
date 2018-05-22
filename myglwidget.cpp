@@ -9,14 +9,6 @@ const unsigned int WIN_WIDTH  = 1220;
 const unsigned int WIN_HEIGHT = 768;
 const float ASPECT_RATIO      = static_cast<float>(WIN_WIDTH) / WIN_HEIGHT;
 const float ORTHO_DIM         = 50.0f;
-int a=0;
-int c=0;
-int h=0;
-float x_=0.0;
-float y_=0.0f;
-float red = 255;
-float green = 0;
-float blue = 0;
 bool esc=false;
 
 
@@ -49,12 +41,8 @@ void MyGLWidget::initializeGL()
             l_brique.push_back(new brique(i*122.0f,j*-50.0f,1));
         }
     }
-    balletest= new balle(743.0f,-685.0f);
-    palettetest = new curseurPalette(683.0f);
-}
-
-void MyGLWidget::setXBarre(float x){
-    pas = x;
+    balle_= new balle(743.0f,-685.0f);
+    curseur = new curseurPalette(683.0f);
 }
 
 
@@ -82,71 +70,70 @@ void MyGLWidget::paintGL()
         glClear(GL_COLOR_BUFFER_BIT); // Effacer le buffer de couleur
         glColor3ub(255,255,255);  // Couleur à utiliser pour dessiner les objets (dans notre cas bleu)
         glLoadIdentity();//on reinitialise les valeurs
-        //glTranslatef(x,y,0);
-        //glRotatef(angle,0,0,1);
 
         for(brique *briques:l_brique){
             briques->dessiner();
         }
 
 
-        palettetest->dessiner();
-        positionCurseur_=palettetest->returnPosX();
+        curseur->dessiner();
+        positionCurseur_=curseur->returnPosX();
 
         if((positionBalle_[1]<(-700)))
         {
-            if (nbBoules>0){
+            if (nbBoules>2){
                 nbBoules=nbBoules-1;
-                balletest->setPosition(palettetest->returnPosX()+60.0,-685.0f);
-                setStart();
+                balle_->setPosition(curseur->returnPosX()+60.0,-685.0f);
+                StartStop();
             }
             else
             {
-                balletest->setPosition(2000,2000);
-                setStart();
+                initializeGL();
+                score_=0;
+                nbBoules=3;
              }
         }
-        balletest->update();
-        balletest->dessiner();
-        positionBalle_[0]=balletest->returnPosX();
+        balle_->update();
+        balle_->dessiner();
+        positionBalle_[0]=balle_->returnPosX();
         if((positionBalle_[0]<4.0) || (positionBalle_[0]>1216.0))
         {
-            balletest->changeDirectionX();
+            balle_->changeDirectionX();
         }
 
-        positionBalle_[1]=balletest->returnPosY();
+        positionBalle_[1]=balle_->returnPosY();
         if(positionBalle_[1]>-5.0)
         {
-            balletest->changeDirectionY();
+            balle_->changeDirectionY();
         }
 
         if (positionBalle_[1]<-685.0){
             if((positionBalle_[0]>positionCurseur_)&&(positionBalle_[0]<positionCurseur_+120))
              {
-                balletest->changeDirectionCurseur((positionBalle_[0]-(positionCurseur_+60.0f))/120.0f);
+                balle_->changeDirectionCurseur((positionBalle_[0]-(positionCurseur_+60.0f))/120.0f);
              }
         }
         std::vector<brique *>::iterator it;
         it=l_brique.begin();
         while(it != l_brique.end())
             {
-            if((((*it)->posx()+120)>=balletest->returnPosX())&&(((*it)->posx()<=balletest->returnPosX())&&(((*it)->posy()-40)<=balletest->returnPosY()))&&((*it)->posy()>=balletest->returnPosY()))
+            if((((*it)->posx()+120)>=balle_->returnPosX())&&(((*it)->posx()<=balle_->returnPosX())&&(((*it)->posy()-40)<=balle_->returnPosY()))&&((*it)->posy()>=balle_->returnPosY()))
             {
-                if(((*it)->posx()+122>=balletest->returnPosX())&&((*it)->posx()+118<=balletest->returnPosX()))
+                if(((*it)->posx()+122>=balle_->returnPosX())&&((*it)->posx()+118<=balle_->returnPosX()))
                 {
-                    balletest->changeDirectionX();
+                    balle_->changeDirectionX();
                 }
-                if(((*it)->posx()<=(balletest-2)->returnPosX())&&((*it)->posx()>=(balletest+2)->returnPosX()))
+                if(((*it)->posx()<=(balle_-2)->returnPosX())&&((*it)->posx()>=(balle_+2)->returnPosX()))
                 {
-                    balletest->changeDirectionX();
+                    balle_->changeDirectionX();
                 }
-                if((((*it)->posy()-42)<=balletest->returnPosY())&&(((*it)->posy()-38)>=balletest->returnPosY()))
+                if((((*it)->posy()-42)<=balle_->returnPosY())&&(((*it)->posy()-38)>=balle_->returnPosY()))
                 {
-                    balletest->changeDirectionY();
+                    balle_->changeDirectionY();
                 }
-                if((((*it)->posy()-2)<=balletest->returnPosY())&&(((*it)->posy()+2)>=balletest->returnPosY()))
+                if((((*it)->posy()-2)<=balle_->returnPosY())&&(((*it)->posy()+2)>=balle_->returnPosY()))
                 {
-                    balletest->changeDirectionY();
+                    balle_->changeDirectionY();
                 }
                 it = l_brique.erase(it);
                 score_ =score_ + 10;
@@ -156,7 +143,7 @@ void MyGLWidget::paintGL()
         }
 
 
-    palettetest->setX(pas);
+    curseur->setX(pas);
 }
 
 
@@ -167,72 +154,33 @@ void MyGLWidget::keyPressEvent(QKeyEvent * event)
     {
     case Qt::Key_Left:
     {
-        palettetest->left();
+        curseur->left();
         break;
     }
     case Qt::Key_Right:
     {
-        palettetest->right();
+        curseur->right();
         break;
     }
-        /*
-    case Qt::Key_Up:
+    // Cas par defaut
+    default:
     {
-        y=y+1;
-        break;
+    // Ignorer l'evenement
+        event->ignore();
+        return;
     }
-    case Qt::Key_Down:
-    {
-        y=y-1;
-        break;
-    }
-
-        // Changement de l'objet a afficher
-        case Qt::Key_Space:
-        {
-        if(a==0){
-            a=1;
-        } else if (a==1) {
-            a=0;
-        }
-            break;
-        }
-
-        // Sortie de l'application
-        case Qt::Key_Escape:
-        {
-        window()->close();
-        esc=true;
-            break;
-        }*/
-
-        // Cas par defaut
-        default:
-        {
-            // Ignorer l'evenement
-            event->ignore();
-            return;
-        }
-    }
+}
 
     // Acceptation de l'evenement et mise a jour de la scene
     event->accept();
     updateGL();
 }
 
-int MyGLWidget::etatPartie () {
-    return nbBoules;
-}
-void MyGLWidget::Newboule(){
-    balletest= new balle(500.0f,-500.0f);
-    palettetest = new curseurPalette(683.0f);
-}
-
-void MyGLWidget::setStart(){
+void MyGLWidget::StartStop(){
     if(m_AnimationTimer.isActive())
     {
-        balletest->update();
-        balletest->dessiner();
+        balle_->update();
+        balle_->dessiner();
         m_AnimationTimer.stop();
     }
     else
@@ -243,10 +191,10 @@ void MyGLWidget::setStart(){
 void MyGLWidget::deplacement(int direction)
 {
     if (direction==1){
-        palettetest->right();
+        curseur->right();
     }
     else if (direction==2) {
-        palettetest->left();
+        curseur->left();
     }
 
 }
